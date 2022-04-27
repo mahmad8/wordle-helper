@@ -1,4 +1,4 @@
-import { test, words } from "./Words";
+import { words } from "./Words";
 
 class Solver {
     constructor() {
@@ -54,7 +54,6 @@ class Solver {
         if (this.contains.length === 0 && this.doesNotContain.length === 0 && this.equals.length === 0) {
             return result;
         }
-        var word;
         for (const word of words) {
             // console.log('checking word ' + word);
             if (this.checkEquals(word) && this.checkContains(word) && this.checkDoesNotContain(word)) {

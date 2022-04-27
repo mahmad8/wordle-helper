@@ -37,7 +37,7 @@ class App extends Component {
     var newIndex;
     const isLetter = /^[a-zA-Z]$/i.test(event.key)
     //event.keyCode >= 65 && event.keyCode <= 90
-    if (isLetter && event.altKey === false && event.metaKey == false) {
+    if (isLetter && event.altKey === false && event.metaKey === false) {
       newLetters[this.state.index] = event.key.toUpperCase();
       newIndex = (this.state.index + 1) % 25;
     } else if (event.keyCode === 8) {
@@ -121,7 +121,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Wordle Helper</h2>
+        <h2>Word Search Helper</h2>
          <div id="buttons" className="buttons">
            {this.state.board.map((x, i) => (
             <Square
