@@ -145,7 +145,7 @@ class App extends Component {
           className="reset-button"
           onClick={this.clearBoard}>Reset</button>
         <Guesses
-          value={this.state.result}
+          value={this.state.result.join(', ')}
           readOnly={true}
         />
         <Keyboard
