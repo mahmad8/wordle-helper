@@ -9,6 +9,7 @@ import 'react-simple-keyboard/build/css/index.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    document.title = "Word Search Helper";
     this.state = {
       board: new Array(25).fill(0),
       letters: new Array(25).fill(''),
