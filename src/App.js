@@ -24,13 +24,13 @@ class App extends Component {
   }
 
   // handleKeyDown(event) {
-    // console.log('key down event ' + event);
+  // console.log('key down event ' + event);
   // }
 
   componentDidMount() {
     document.addEventListener('keydown', this.updateLetter)
-    }
-  
+  }
+
   updateLetter(event) {
     // console.log('key update ' + event.key + ' ' + event.keyCode + ' alt: ' + event.altKey + ' meta: ' + event.metaKey);
     var newLetters = this.state.letters;
@@ -42,14 +42,19 @@ class App extends Component {
       newIndex = (this.state.index + 1) % 25;
     } else if (event.keyCode === 8) {
       var index = this.state.index;
-      if (index !== 0) {
-        newLetters[this.state.index - 1] = '';
+      if (this.state.letters[index] !== '') {
+        newLetters[index] = '';
+        if (index > 0) {
+          newIndex = index - 1;
+        }
+      } else if (index !== 0) {
+        newLetters[index - 1] = '';
         newIndex = index - 1;
       } else if (index === 0) {
         newLetters[0] = '';
         newIndex = 0;
       }
-     } else {
+    } else {
       return;
     }
     var result = this.solver.solve(this.state.board, newLetters);
@@ -74,7 +79,7 @@ class App extends Component {
         newLetters[0] = '';
         newIndex = 0;
       }
-     } else {
+    } else {
       return;
     }
     var result = this.solver.solve(this.state.board, newLetters);
@@ -82,14 +87,14 @@ class App extends Component {
     this.setState({ letters: newLetters, index: newIndex, result: result });
   }
 
-  
+
   // window.addEventListener('keydown', handleKeyDown);
 
   componentWillUnmount() {
-      document.removeEventListener('keydown', this.updateLetter);
+    document.removeEventListener('keydown', this.updateLetter);
   }
 
- 
+
   handleClick(i) {
     // console.log('clicked button ' + i)
     var board = this.state.board;
@@ -106,7 +111,7 @@ class App extends Component {
     // console.log('clearing board')
     var board = new Array(25).fill(0);
     var letters = new Array(25).fill('');
-    this.setState({ board: board, letters: letters, index: 0});
+    this.setState({ board: board, letters: letters, index: 0 });
   }
 
   onChange = (input) => {
@@ -122,35 +127,36 @@ class App extends Component {
     return (
       <div className="App">
         <h2>Word Search Helper</h2>
-         <div id="buttons" className="buttons">
-           {this.state.board.map((x, i) => (
+        <div id="buttons" className="buttons">
+          {this.state.board.map((x, i) => (
             <Square
               value={this.state.board[i]}
               letter={this.state.letters[i]}
               key={'board' + i}
               id={i}
-              onClick={ (id) => this.handleClick(id) } />))}
+              onClick={(id) => this.handleClick(id)} />))}
         </div>
-        <button 
-        className="reset-button"
-        onClick={this.clearBoard}>Reset</button>
+        <button
+          className="reset-button"
+          onClick={this.clearBoard}>Reset</button>
         <Guesses
           value={this.state.result}
           readOnly={true}
-          />
-          <Keyboard
-        onChange={this.onChange}
-        onKeyPress={this.onKeyPress}
-        layout={{
-          default: [
-            "Q W E R T Y U I O P",
-            "A S D F G H J K L",
-            'Z X C V B N M {bksp}'
-          ]
-        }}
-      />
+        />
+        <Keyboard
+          onChange={this.onChange}
+          onKeyPress={this.onKeyPress}
+          layout={{
+            default: [
+              "Q W E R T Y U I O P",
+              "A S D F G H J K L",
+              'Z X C V B N M {bksp}'
+            ]
+          }}
+        />
       </div>
-    )}
+    )
+  }
 }
 
 export default App;

@@ -37,7 +37,7 @@ class Solver {
         for (i = 0; i < 25; i++) {
             var x = board[i];
             var letter = letters[i];
-            var tuple = [i, letter];
+            var tuple = [i%5, letter];
             // console.log('pos: ' + i + ' letter: ' + letter + ' board: ' + x);
             if (letter !== undefined && letter !== '' && x !== 0) {
                 if (x === 1) { //green
@@ -61,7 +61,7 @@ class Solver {
             }
         }
         if (result.length > 500) { 
-            return ['too many results ' + result.length]; 
+            return ['too many results']; 
         } else {
             return result;
         }
