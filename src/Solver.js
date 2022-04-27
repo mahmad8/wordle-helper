@@ -41,7 +41,7 @@ class Solver {
             // console.log('pos: ' + i + ' letter: ' + letter + ' board: ' + x);
             if (letter !== undefined && letter !== '' && x !== 0) {
                 if (x === 1) { //green
-                    console.log('add rule equals ' + tuple);
+                    // console.log('add rule equals ' + tuple);
                     this.equals.push(tuple);
                 } else if (x === 2) { // yellow
                     this.contains.push(letter);

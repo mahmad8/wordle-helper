@@ -32,7 +32,7 @@ class App extends Component {
     }
   
   updateLetter(event) {
-    console.log('key update ' + event.key + ' ' + event.keyCode + ' alt: ' + event.altKey + ' meta: ' + event.metaKey);
+    // console.log('key update ' + event.key + ' ' + event.keyCode + ' alt: ' + event.altKey + ' meta: ' + event.metaKey);
     var newLetters = this.state.letters;
     var newIndex;
     const isLetter = /^[a-zA-Z]$/i.test(event.key)
@@ -53,12 +53,12 @@ class App extends Component {
       return;
     }
     var result = this.solver.solve(this.state.board, newLetters);
-    console.log('result:' + result);
+    // console.log('result:' + result);
     this.setState({ letters: newLetters, index: newIndex, result: result });
   }
 
   updateLetter2(letter) {
-    console.log('letter ' + letter);
+    // console.log('letter ' + letter);
     var newLetters = this.state.letters;
     var newIndex;
     const isLetter = /^[a-zA-Z]$/i.test(letter)
@@ -78,7 +78,7 @@ class App extends Component {
       return;
     }
     var result = this.solver.solve(this.state.board, newLetters);
-    console.log('result:' + result);
+    // console.log('result:' + result);
     this.setState({ letters: newLetters, index: newIndex, result: result });
   }
 
@@ -91,30 +91,30 @@ class App extends Component {
 
  
   handleClick(i) {
-    console.log('clicked button ' + i)
+    // console.log('clicked button ' + i)
     var board = this.state.board;
     var v = this.state.board[i];
     v = v + 1;
     v = v % 4;
     board[i] = v;
     var result = this.solver.solve(board, this.state.letters);
-    console.log('result:' + result);
+    // console.log('result:' + result);
     this.setState({ board: board, index: i, result: result })
   }
 
   clearBoard() {
-    console.log('clearing board')
+    // console.log('clearing board')
     var board = new Array(25).fill(0);
     var letters = new Array(25).fill('');
     this.setState({ board: board, letters: letters, index: 0});
   }
 
   onChange = (input) => {
-    console.log("Input changed", input);
+    // console.log("Input changed", input);
   }
 
   onKeyPress = (button) => {
-    console.log("Button pressed", button);
+    // console.log("Button pressed", button);
     this.updateLetter2(button);
   }
 
