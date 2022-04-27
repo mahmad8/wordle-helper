@@ -72,8 +72,13 @@ class App extends Component {
       newIndex = (this.state.index + 1) % 25;
     } else if (letter === '{bksp}') {
       var index = this.state.index;
-      if (index !== 0) {
-        newLetters[this.state.index - 1] = '';
+      if (this.state.letters[index] !== '') {
+        newLetters[index] = '';
+        if (index > 0) {
+          newIndex = index - 1;
+        }
+      } else if (index !== 0) {
+        newLetters[index - 1] = '';
         newIndex = index - 1;
       } else if (index === 0) {
         newLetters[0] = '';
