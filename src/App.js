@@ -127,7 +127,7 @@ class App extends Component {
     // console.log('clearing board')
     var board = new Array(25).fill(0);
     var letters = new Array(25).fill('');
-    this.setState({ board: board, letters: letters, index: 0 });
+    this.setState({ board: board, letters: letters, index: 0, result: [] });
   }
 
   onChange = (input) => {
