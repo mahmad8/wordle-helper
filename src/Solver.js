@@ -20,12 +20,40 @@ class Solver {
     }
 
     checkContains(word) {
-        return this.contains.length === 0 || this.contains.every(letter => word.includes(letter.toLowerCase()));
+        var initialCheck = this.contains.length === 0 || this.contains.map((x) => x[1]).every(letter => word.includes(letter.toLowerCase()));
+        if (!initialCheck) { 
+            return false;
+        }
+        var rule;
+        for (rule of this.contains) {
+            var pos = rule[0];
+            var letter = rule[1];
+            if (word[pos] === letter.toLowerCase()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 
     checkDoesNotContain(word) {
-        return this.doesNotContain.length === 0 || !(this.doesNotContain.every(letter => word.includes(letter.toLowerCase())));
+        var firstCheck = this.doesNotContain.length === 0 || 
+        (this.doesNotContain.map((x) => x[1]).every(letter => 
+            (this.contains.map((x) => x[1]).includes(letter)) || 
+            (this.equals.map((x) => x[1]).includes(letter)) || 
+            !word.includes(letter.toLowerCase())));
+        if (!firstCheck) {
+            return false;
+        }
+        var rule;
+        for (rule of this.doesNotContain) {
+            var pos = rule[0];
+            var letter = rule[1];
+            if (word[pos] === letter.toLowerCase()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     solve(board, letters) {
@@ -44,9 +72,9 @@ class Solver {
                     // console.log('add rule equals ' + tuple);
                     this.equals.push(tuple);
                 } else if (x === 2) { // yellow
-                    this.contains.push(letter);
+                    this.contains.push(tuple);
                 } else { // grey
-                    this.doesNotContain.push(letter);
+                    this.doesNotContain.push(tuple);
                 }
             }
         }
