@@ -5,6 +5,9 @@ import Guesses from "./Guesses";
 import Solver from "./Solver";
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +17,8 @@ class App extends Component {
       board: new Array(25).fill(0),
       letters: new Array(25).fill(''),
       result: [],
-      index: 0
+      index: 0,
+      modalOpen: false
     };
     this.handleClick = this.handleClick.bind(this);
     this.updateLetter = this.updateLetter.bind(this);
@@ -22,14 +26,20 @@ class App extends Component {
     this.onKeyPress = this.onKeyPress.bind(this);
     this.clearBoard = this.clearBoard.bind(this);
     this.solver = new Solver();
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
-
-  // handleKeyDown(event) {
-  // console.log('key down event ' + event);
-  // }
 
   componentDidMount() {
     document.addEventListener('keydown', this.updateLetter)
+  }
+
+  openModal() {
+    this.setState({ modalOpen: true });
+  }
+
+  closeModal() {
+    this.setState({ modalOpen: false });
   }
 
   updateLetter(event) {
@@ -132,7 +142,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h2>Word Search Helper</h2>
+        <div className="top-bar">
+          <h2 class="title">Word Search Helper</h2>
+          <div class="help"><button class="help-button" onClick={this.openModal}>?</button></div>
+        </div>
         <div id="buttons" className="buttons">
           {this.state.board.map((x, i) => (
             <Square
@@ -160,6 +173,26 @@ class App extends Component {
             ]
           }}
         />
+        <Modal
+          open={this.state.modalOpen}
+          onClose={this.closeModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box className="modal">
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              How to use Word Search Helper
+          </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Type your guesses into the squares.</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>Then clicks the squares to indicate their match status:</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREEN = the letter is correctly placed</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>YELLOW = the letter exists somewhere else in the word</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREY = the letter is not in the word</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>WHITE = no status (default)</Typography>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>As you type the box below will populate with words that match the pattern!</Typography>
+          </Box>
+        </Modal>
       </div>
     )
   }
