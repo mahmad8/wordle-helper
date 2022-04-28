@@ -183,14 +183,13 @@ class App extends Component {
             <Typography id="modal-modal-title" variant="h6" component="h2">
               How to use Word Search Helper
           </Typography>
-            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-              Type your guesses into the squares.</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>Then clicks the squares to indicate their match status:</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREEN = the letter is correctly placed</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>YELLOW = the letter exists somewhere else in the word</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREY = the letter is not in the word</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>WHITE = no status (default)</Typography>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>As you type the box below will populate with words that match the pattern!</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>Type your guesses into the squares.</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>Then click the squares to indicate their match status:</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREEN = the letter is correctly placed</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>YELLOW = the letter exists somewhere else in the word</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>GREY = the letter is not in the word</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>WHITE = no status (default)</Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>As you type the box below will populate with words that match the pattern!</Typography>
           </Box>
         </Modal>
       </div>
