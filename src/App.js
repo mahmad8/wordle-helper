@@ -12,7 +12,7 @@ import Modal from '@mui/material/Modal';
 class App extends Component {
   constructor(props) {
     super(props);
-    document.title = "Word Search Helper";
+    document.title = "Wordle Helper";
     this.state = {
       board: new Array(25).fill(0),
       letters: new Array(25).fill(''),
@@ -143,7 +143,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="top-bar">
-          <h2 class="title">Word Search Helper</h2>
+          <h2 class="title">Wordle Helper</h2>
           <div class="help"><button class="help-button" onClick={this.openModal}>?</button></div>
         </div>
         <div id="buttons" className="buttons">
@@ -181,7 +181,7 @@ class App extends Component {
         >
           <Box className="modal">
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              How to use Word Search Helper
+              How to use Wordle Helper
           </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>Type your guesses into the squares.</Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>Then click the squares to indicate their match status:</Typography>
