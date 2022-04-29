@@ -190,7 +190,7 @@ class App extends Component {
               }}
             >
               <MenuItem onClick={this.closeMenuShowModal}>How to</MenuItem>
-              <MenuItem onClick={this.closeMenuShowModal}>About</MenuItem>
+              <MenuItem onClick={this.closeMenu}><a href="mailto:wordle.helper.net@gmail.com" target="_top">Feedback</a></MenuItem>
             </Menu>
           </Toolbar>
         </AppBar>
