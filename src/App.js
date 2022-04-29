@@ -8,6 +8,11 @@ import 'react-simple-keyboard/build/css/index.css';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +21,11 @@ class App extends Component {
     this.state = {
       board: new Array(25).fill(0),
       letters: new Array(25).fill(''),
-      result: [],
+      result: ['Guesses will appear here'],
       index: 0,
-      modalOpen: false
+      modalOpen: false,
+      menuOpen: false,
+      anchorEl: null
     };
     this.handleClick = this.handleClick.bind(this);
     this.updateLetter = this.updateLetter.bind(this);
@@ -28,6 +35,10 @@ class App extends Component {
     this.solver = new Solver();
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.openMenu = this.openMenu.bind(this);
+    this.closeMenu = this.closeMenu.bind(this);
+    this.closeMenuShowModal = this.closeMenuShowModal.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this)
   }
 
   componentDidMount() {
@@ -40,6 +51,22 @@ class App extends Component {
 
   closeModal() {
     this.setState({ modalOpen: false });
+  }
+
+  openMenu() {
+    this.setState({ menuOpen: true });
+  }
+
+  closeMenu() {
+    this.setState({ menuOpen: false, anchorEl: null });
+  }
+
+  closeMenuShowModal() {
+    this.setState({ modalOpen: true, menuOpen: false, anchorEl: null });
+  }
+
+  handleMenuClick(event) {
+    this.setState({ anchorEl: event.currentTarget, menuOpen: true });
   }
 
   updateLetter(event) {
@@ -142,10 +169,31 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="top-bar">
-          <h2 class="title">Wordle Helper</h2>
-          <div class="help"><button class="help-button" onClick={this.openModal}>?</button></div>
-        </div>
+        <AppBar position="static" color="transparent" elevation={0}>
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <h2>Wordle Helper</h2>
+          </Typography>
+            <Button
+              color="inherit"
+              variant="contained"
+              onClick={this.handleMenuClick}
+              onClose={this.closeMenu}
+            >?</Button>
+            <Menu
+              id="basic-menu"
+              anchorEl={this.state.anchorEl}
+              open={this.state.menuOpen}
+              onClose={this.closeMenu}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+            >
+              <MenuItem onClick={this.closeMenuShowModal}>How to</MenuItem>
+              <MenuItem onClick={this.closeMenuShowModal}>About</MenuItem>
+            </Menu>
+          </Toolbar>
+        </AppBar>
         <div id="buttons" className="buttons">
           {this.state.board.map((x, i) => (
             <Square
@@ -155,9 +203,13 @@ class App extends Component {
               id={i}
               onClick={(id) => this.handleClick(id)} />))}
         </div>
-        <button
-          className="reset-button"
-          onClick={this.clearBoard}>Reset</button>
+        <Button
+          style={{margin: "10px"}}
+          color="inherit"
+          variant="contained"
+          onClick={this.clearBoard}>
+            Reset
+          </Button>
         <Guesses
           value={this.state.result.join(', ')}
           readOnly={true}
