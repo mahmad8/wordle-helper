@@ -97,6 +97,7 @@ class App extends Component {
     }
     var result = this.solver.solve(this.state.board, newLetters);
     // console.log('result:' + result);
+    // this[`button-${newIndex}`].focus();
     this.setState({ letters: newLetters, index: newIndex, result: result });
   }
 
@@ -171,6 +172,7 @@ class App extends Component {
       <div className="App">
         <AppBar position="static" color="transparent" elevation={0}>
           <Toolbar>
+          <Button style={{ background: 'transparent', border: 'none', color: 'transparent' }}>?</Button>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <h2>Wordle Helper</h2>
           </Typography>
@@ -201,6 +203,7 @@ class App extends Component {
               letter={this.state.letters[i]}
               key={'board' + i}
               id={i}
+              // ref={ input => this[`button-${i}`] = input }
               onClick={(id) => this.handleClick(id)} />))}
         </div>
         <Button

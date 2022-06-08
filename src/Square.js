@@ -22,6 +22,7 @@ class Square extends React.Component {
         key={'board' + this.props.id}
         value={this.props.value}
         id={this.props.id}
+        // ref={this.props.ref}
         onClick={() => this.props.onClick(this.props.id)}>{this.props.letter}</button>
     );
   }

@@ -63,3 +63,11 @@
   box-shadow: 24;
   padding: 4px;
 };
+
+.bar-root {
+  flex-grow: 1;
+}
+
+.app-bar {
+  align-items: center;
+}
